@@ -30,6 +30,10 @@ public class ProductController {
         int result = iProductService.save(product);
         if(result==1){
             serviceResponse.setMessage("Agregado Con Exito");
+            serviceResponse.setSeccess(true);
+        }else{
+            serviceResponse.setMessage("No se agrego correctamente");
+            serviceResponse.setSeccess(false);
         }
         return new ResponseEntity<>(serviceResponse, HttpStatus.OK);
     }
@@ -40,6 +44,10 @@ public class ProductController {
         int result = iProductService.update(product);
         if(result==1){
             serviceResponse.setMessage("Modificado Con Exito");
+            serviceResponse.setSeccess(true);
+        }else{
+            serviceResponse.setMessage("No se modifico correctamente");
+            serviceResponse.setSeccess(false);
         }
         return new ResponseEntity<>(serviceResponse, HttpStatus.OK);
     }
@@ -50,6 +58,10 @@ public class ProductController {
         int result = iProductService.deleteById(id);
         if(result==1){
             serviceResponse.setMessage("Eliminado Con Exito");
+            serviceResponse.setSeccess(true);
+        }else{
+            serviceResponse.setMessage("No se elimino correctamente");
+            serviceResponse.setSeccess(false);
         }
         return new ResponseEntity<>(serviceResponse, HttpStatus.OK);
     }
