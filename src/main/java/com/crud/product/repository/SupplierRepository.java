@@ -1,6 +1,5 @@
 package com.crud.product.repository;
 
-import com.crud.product.model.Product;
 import com.crud.product.model.Supplier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
