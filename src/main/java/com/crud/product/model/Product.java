@@ -9,6 +9,6 @@ public class Product {
     private Integer stock;
     private Float price_buy;
     private Float price_sale;
-    private Integer id_supplier;
+    private Supplier supplier;
     private Integer status;
 }

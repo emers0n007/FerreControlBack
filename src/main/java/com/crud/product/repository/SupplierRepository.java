@@ -35,7 +35,7 @@ public class SupplierRepository implements ISupplierRepository{
 
     @Override
     public int deleteById(int id) {
-        String SQL ="UPDATE Supplier SET status=0 WHERE id =?";
+        String SQL ="UPDATE Supplier SET status=0 WHERE id_supplier =?";
         return jdbcTemplate.update(SQL,new Object[]{id});
     }
 }
