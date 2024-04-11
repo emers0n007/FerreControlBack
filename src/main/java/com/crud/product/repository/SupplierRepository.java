@@ -21,8 +21,8 @@ public class SupplierRepository implements ISupplierRepository{
 
     @Override
     public int save(Supplier supplier) {
-        String SQL = "INSERT INTO Supplier VALUES(?,?,?,?)";
-        return jdbcTemplate.update(SQL, new Object[]{supplier.getId_supplier(),supplier.getName(),supplier.getPhone(), supplier.getEmail()});
+        String SQL = "INSERT INTO Supplier VALUES(?,?,?,?,?)";
+        return jdbcTemplate.update(SQL, new Object[]{supplier.getId_supplier(),supplier.getName(),supplier.getPhone(), supplier.getEmail(), supplier.getStatus()});
     }
 
     @Override
