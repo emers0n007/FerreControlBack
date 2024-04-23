@@ -11,5 +11,6 @@ public class Buy {
     private Integer id_supplier;
     private Date purchase_date;
     private Float total_price;
+    private String name_user;
     private List<Product> buyDetail;
 }

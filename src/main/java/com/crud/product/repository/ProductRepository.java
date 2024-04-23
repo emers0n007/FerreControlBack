@@ -1,5 +1,6 @@
 package com.crud.product.repository;
 
+import com.crud.product.model.Mark;
 import com.crud.product.model.Product;
 import com.crud.product.model.Supplier;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Repository
@@ -16,9 +18,10 @@ public class ProductRepository implements IProductRepository{
     private JdbcTemplate jdbcTemplate;
     @Override
     public List<Product> findAll() {
-        String SQL = "SELECT p.*, s.id_supplier as supplier_id, s.name as supplier_name, s.phone as supplier_phone, s.email as supplier_email " +
+        String SQL = "SELECT p.*, s.id_supplier as supplier_id, s.name as supplier_name, s.phone as supplier_phone, s.email as supplier_email, m.id_mark as id_mark, m.name_mark as name_mark " +
                 "FROM product p " +
                 "JOIN supplier s ON p.id_supplier = s.id_supplier " +
+                "JOIN mark m ON p.id_mark = m.id_mark " +
                 "WHERE p.status = 1";
 
         return jdbcTemplate.query(SQL, (rs, rowNum) -> {
@@ -36,6 +39,13 @@ public class ProductRepository implements IProductRepository{
             supplier.setEmail(rs.getString("supplier_email"));
 
             product.setSupplier(supplier);
+
+            Mark mark = new Mark();
+            mark.setId_mark(rs.getInt("id_mark"));
+            mark.setName_mark(rs.getString("name_mark"));
+
+            product.setMark(mark);
+
             product.setStatus(rs.getInt("status"));
 
             return product;
@@ -43,14 +53,14 @@ public class ProductRepository implements IProductRepository{
     }
     @Override
     public int save(Product product) {
-        String SQL = "INSERT INTO product VALUES(?,?,?,?,?,?,?)";
-        return jdbcTemplate.update(SQL, new Object[]{product.getId_product(), product.getName(), product.getStock(),product.getPrice_buy(),product.getPrice_sale(),product.getSupplier().getId_supplier(),product.getStatus()});
+        String SQL = "INSERT INTO product VALUES(?,?,?,?,?,?,?,?,?,?)";
+        return jdbcTemplate.update(SQL, new Object[]{product.getId_product(), product.getName(), product.getStock(),product.getPrice_buy(),product.getPrice_sale(),product.getSupplier().getId_supplier(),product.getStatus(), product.getPresentation(),product.getDescription_presentation(),product.getMark().getId_mark()});
     }
 
     @Override
     public int update(Product product) {
-        String SQL = "UPDATE product SET name=?,stock=?,price_buy=?,price_sale=?,id_supplier=? WHERE id_product =?";
-        return jdbcTemplate.update(SQL,new Object[]{product.getName(), product.getStock(), product.getPrice_buy(), product.getPrice_sale(),product.getSupplier().getId_supplier(),product.getId_product()});
+        String SQL = "UPDATE product SET name=?,stock=?,price_buy=?,price_sale=?,id_supplier=?, id_mark = ? WHERE id_product =?";
+        return jdbcTemplate.update(SQL,new Object[]{product.getName(), product.getStock(), product.getPrice_buy(), product.getPrice_sale(),product.getSupplier().getId_supplier(),product.getMark().getId_mark(), product.getId_product()});
     }
 
     @Override

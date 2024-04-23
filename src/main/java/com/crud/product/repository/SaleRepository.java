@@ -32,7 +32,6 @@ public class SaleRepository implements ISaleRepository{
             if (sale == null) {
                 sale = new Sale();
                 sale.setId_sale(id_buy);
-                sale.setId_supplier(rs.getInt("id_supplier"));
                 sale.setSale_date(rs.getDate("sale_date"));
                 sale.setTotal_price(rs.getFloat("total_price"));
                 sale.setSaleDetail(new ArrayList<>());
@@ -54,8 +53,8 @@ public class SaleRepository implements ISaleRepository{
     public int save(Sale sale) {
         int aux = 0;
         // Insert into Buy table
-        String buyInsertSQL = "INSERT INTO Sale (id_sale, id_supplier, sale_date, total_price) VALUES (?, ?, ?, ?)";
-        aux = jdbcTemplate.update(buyInsertSQL, sale.getId_sale(), sale.getId_supplier(), sale.getSale_date(), sale.getTotal_price());
+        String buyInsertSQL = "INSERT INTO Sale (id_sale, name_user, sale_date, total_price) VALUES (?, ?, ?, ?)";
+        aux = jdbcTemplate.update(buyInsertSQL, sale.getId_sale(), sale.getName_user(), sale.getSale_date(), sale.getTotal_price());
 
         // Insert into Buy_Detail table for each product in buyDetail list
         String buyDetailInsertSQL = "INSERT INTO Sale_Detail (id_sale, id_product, quantity, price) VALUES (?, ?, ?, ?)";
@@ -97,7 +96,7 @@ public class SaleRepository implements ISaleRepository{
                 if (sale == null) {
                     sale = new Sale();
                     sale.setId_sale(rs.getInt("id_sale"));
-                    sale.setId_supplier(rs.getInt("id_supplier"));
+                    sale.setName_user(rs.getString("name_user"));
                     sale.setSale_date(rs.getDate("purchase_date"));
                     sale.setTotal_price(rs.getFloat("total_price"));
                 }
