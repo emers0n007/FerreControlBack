@@ -31,6 +31,8 @@ public class ProductRepository implements IProductRepository{
             product.setStock(rs.getInt("stock"));
             product.setPrice_buy(rs.getFloat("price_buy"));
             product.setPrice_sale(rs.getFloat("price_sale"));
+            product.setPresentation(rs.getString("presentation"));
+            product.setDescription_presentation(rs.getInt("description_presentation"));
 
             Supplier supplier = new Supplier();
             supplier.setId_supplier(rs.getInt("supplier_id"));

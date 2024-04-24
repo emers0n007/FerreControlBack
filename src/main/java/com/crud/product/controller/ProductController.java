@@ -1,5 +1,6 @@
 package com.crud.product.controller;
 
+import com.crud.product.model.Mark;
 import com.crud.product.model.Product;
 import com.crud.product.model.ServiceResponse;
 import com.crud.product.service.IProductService;
@@ -23,6 +24,8 @@ public class ProductController {
         var listProducts = iProductService.findAll();
         return new ResponseEntity<>(listProducts, HttpStatus.OK);
     }
+
+
 
     @PostMapping("/save/product")
     public ResponseEntity<ServiceResponse> save(@RequestBody Product product){
