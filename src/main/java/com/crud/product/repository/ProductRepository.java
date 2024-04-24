@@ -61,8 +61,8 @@ public class ProductRepository implements IProductRepository{
 
     @Override
     public int update(Product product) {
-        String SQL = "UPDATE product SET name=?,stock=?,price_buy=?,price_sale=?,id_supplier=?, id_mark = ? WHERE id_product =?";
-        return jdbcTemplate.update(SQL,new Object[]{product.getName(), product.getStock(), product.getPrice_buy(), product.getPrice_sale(),product.getSupplier().getId_supplier(),product.getMark().getId_mark(), product.getId_product()});
+        String SQL = "UPDATE product SET name=?,stock=?,price_buy=?,price_sale=?,id_supplier=?, id_mark = ?, presentation=?, description_presentation=? WHERE id_product =?";
+        return jdbcTemplate.update(SQL,new Object[]{product.getName(), product.getStock(), product.getPrice_buy(), product.getPrice_sale(),product.getSupplier().getId_supplier(),product.getMark().getId_mark(),product.getPresentation(),product.getDescription_presentation(), product.getId_product()});
     }
 
     @Override

@@ -15,7 +15,7 @@ public class SupplierRepository implements ISupplierRepository{
     private JdbcTemplate jdbcTemplate;
     @Override
     public List<Supplier> findAll() {
-        String SQL = "SELECT * FROM supplier";
+        String SQL = "SELECT * FROM supplier WHERE status_supplier = 1";
         return jdbcTemplate.query(SQL, BeanPropertyRowMapper.newInstance(Supplier.class));
     }
 
@@ -34,7 +34,7 @@ public class SupplierRepository implements ISupplierRepository{
 
     @Override
     public int deleteById(int id) {
-        String SQL ="UPDATE Supplier SET status=0 WHERE id_supplier =?";
+        String SQL ="UPDATE Supplier SET status_supplier=0 WHERE id_supplier =?";
         return jdbcTemplate.update(SQL,new Object[]{id});
     }
 }
