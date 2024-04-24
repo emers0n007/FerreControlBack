@@ -55,8 +55,8 @@ public class BuyRepository implements IBuyRepository{
     public int save(Buy buy) {
         int aux = 0;
         // Insert into Buy table
-        String buyInsertSQL = "INSERT INTO Buy (id_buy, id_supplier, purchase_date, total_price) VALUES (?, ?, ?, ?)";
-        aux = jdbcTemplate.update(buyInsertSQL, buy.getId_buy(), buy.getId_supplier(), buy.getPurchase_date(), buy.getTotal_price());
+        String buyInsertSQL = "INSERT INTO Buy (id_buy, id_supplier, purchase_date, total_price,name_user) VALUES (?, ?, ?, ?,?)";
+        aux = jdbcTemplate.update(buyInsertSQL, buy.getId_buy(), buy.getId_supplier(), buy.getPurchase_date(), buy.getTotal_price(),buy.getName_user());
 
         // Insert into Buy_Detail table for each product in buyDetail list
         String buyDetailInsertSQL = "INSERT INTO Buy_Detail (id_buy, id_product, quantity, price) VALUES (?, ?, ?, ?)";
