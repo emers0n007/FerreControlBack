@@ -25,9 +25,18 @@ public class MarkService implements IMarkService{
 
     @Override
     public int save(Mark mark) {
-        int row;
+        int row = 0;
         try {
-            row = iMarkRepository.save(mark);
+            List<Mark> marks = findAll();
+            Boolean exist = false;
+            for (Mark newMark : marks) {
+                if(mark.getName_mark().compareToIgnoreCase(newMark.getName_mark())==0){
+                    exist = true;
+                }
+            }
+            if(!exist){
+                row = iMarkRepository.save(mark);
+            }
         }catch (Exception ex){
             throw ex;
         }

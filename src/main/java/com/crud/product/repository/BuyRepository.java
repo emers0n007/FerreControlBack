@@ -26,9 +26,9 @@ public class BuyRepository implements IBuyRepository{
                 "JOIN Buy_Detail bd ON b.id_buy = bd.id_buy " +
                 "JOIN Product p ON bd.id_product = p.id_product";
 
-        Map<Integer, Buy> buyMap = new HashMap<>();
+        Map<String, Buy> buyMap = new HashMap<>();
         jdbcTemplate.query(SQL, rs -> {
-            int id_buy = rs.getInt("id_buy");
+            String id_buy = rs.getString("id_buy");
             Buy buy = buyMap.get(id_buy);
             if (buy == null) {
                 buy = new Buy();
@@ -97,7 +97,7 @@ public class BuyRepository implements IBuyRepository{
             while (rs.next()) {
                 if (buy == null) {
                     buy = new Buy();
-                    buy.setId_buy(rs.getInt("id_buy"));
+                    buy.setId_buy(rs.getString("id_buy"));
                     buy.setId_supplier(rs.getInt("id_supplier"));
                     buy.setPurchase_date(rs.getDate("purchase_date"));
                     buy.setTotal_price(rs.getFloat("total_price"));

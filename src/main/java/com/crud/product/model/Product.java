@@ -10,8 +10,7 @@ public class Product {
     private Float price_buy;
     private Float price_sale;
     private Supplier supplier;
-    private String presentation;
-    private Integer description_presentation;
     private Mark mark;
+    private Presentation presentation;
     private Integer status;
 }

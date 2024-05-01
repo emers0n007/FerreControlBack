@@ -25,9 +25,9 @@ public class SaleRepository implements ISaleRepository{
                 "JOIN Sale_Detail bd ON b.is_sale = bd.is_sale " +
                 "JOIN Product p ON bd.id_product = p.id_product";
 
-        Map<Integer, Sale> saleMap = new HashMap<>();
+        Map<String, Sale> saleMap = new HashMap<>();
         jdbcTemplate.query(SQL, rs -> {
-            int id_buy = rs.getInt("id_buy");
+            String id_buy = rs.getString("id_buy");
             Sale sale = saleMap.get(id_buy);
             if (sale == null) {
                 sale = new Sale();
@@ -95,7 +95,7 @@ public class SaleRepository implements ISaleRepository{
             while (rs.next()) {
                 if (sale == null) {
                     sale = new Sale();
-                    sale.setId_sale(rs.getInt("id_sale"));
+                    sale.setId_sale(rs.getString("id_sale"));
                     sale.setName_user(rs.getString("name_user"));
                     sale.setSale_date(rs.getDate("purchase_date"));
                     sale.setTotal_price(rs.getFloat("total_price"));

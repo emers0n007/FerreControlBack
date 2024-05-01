@@ -22,7 +22,7 @@ public class MarkRepository implements IMarkRepository{
 
     @Override
     public int save(Mark mark) {
-        String SQL = "INSERT INTO Mark VALUES(?,?)";
-        return jdbcTemplate.update(SQL, new Object[]{mark.getId_mark(),mark.getName_mark()});
+        String SQL = "INSERT INTO Mark VALUES(?)";
+        return jdbcTemplate.update(SQL, new Object[]{mark.getName_mark()});
     }
 }

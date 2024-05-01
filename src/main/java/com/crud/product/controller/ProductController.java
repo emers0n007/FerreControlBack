@@ -3,6 +3,7 @@ package com.crud.product.controller;
 import com.crud.product.model.Mark;
 import com.crud.product.model.Product;
 import com.crud.product.model.ServiceResponse;
+import com.crud.product.service.IPresentationService;
 import com.crud.product.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,9 @@ public class ProductController {
     @Autowired
     private IProductService iProductService;
 
+    @Autowired
+    private IPresentationService iPresentationService;
+
     @GetMapping("/list/product")
     public ResponseEntity<List<Product>> findAll(){
         var listProducts = iProductService.findAll();
@@ -30,7 +34,10 @@ public class ProductController {
     @PostMapping("/save/product")
     public ResponseEntity<ServiceResponse> save(@RequestBody Product product){
         ServiceResponse serviceResponse =  new ServiceResponse();
-        int result = iProductService.save(product);
+        iPresentationService.save(product.getPresentation());
+        System.out.println(product.getPresentation().toString());
+        //int result = iProductService.save(product);
+        int result = 1;
         if(result==1){
             serviceResponse.setMessage("Agregado Con Exito");
             serviceResponse.setSeccess(true);
