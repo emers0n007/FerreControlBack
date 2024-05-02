@@ -12,5 +12,6 @@ public class Product {
     private Supplier supplier;
     private Mark mark;
     private Presentation presentation;
+    private Integer quantity;
     private Integer status;
 }

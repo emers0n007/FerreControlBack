@@ -5,4 +5,6 @@ import com.crud.product.model.Presentation;
 
 public interface IPresentationService {
     public int save(Presentation presentation);
+
+    public int findTop();
 }

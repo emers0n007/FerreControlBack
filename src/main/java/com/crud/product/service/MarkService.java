@@ -42,4 +42,15 @@ public class MarkService implements IMarkService{
         }
         return row;
     }
+
+    @Override
+    public Mark findTop(Mark mark) {
+        Mark row;
+        try {
+            row = iMarkRepository.findTop(mark);
+        }catch (Exception ex){
+            throw ex;
+        }
+        return row;
+    }
 }

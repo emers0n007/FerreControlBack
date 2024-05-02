@@ -61,8 +61,8 @@ public class ProductRepository implements IProductRepository{
     }
     @Override
     public int save(Product product) {
-        String SQL = "INSERT INTO product VALUES(?,?,?,?,?,?,?,?,?)";
-        return jdbcTemplate.update(SQL, new Object[]{product.getId_product(), product.getName(), product.getStock(),product.getPrice_buy(),product.getPrice_sale(),product.getSupplier().getId_supplier(),product.getStatus(), product.getMark().getId_mark(), product.getPresentation().getId_presentation()});
+        String SQL = "INSERT INTO product VALUES(?,?,?,?,?,?,?,?,?,?)";
+        return jdbcTemplate.update(SQL, new Object[]{product.getId_product(), product.getName(), product.getStock(),product.getPrice_buy(),product.getPrice_sale(),product.getSupplier().getId_supplier(),product.getStatus(), product.getMark().getId_mark(), product.getPresentation().getId_presentation(), product.getQuantity()});
     }
 
     @Override

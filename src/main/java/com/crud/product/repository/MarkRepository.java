@@ -25,4 +25,10 @@ public class MarkRepository implements IMarkRepository{
         String SQL = "INSERT INTO Mark VALUES(?)";
         return jdbcTemplate.update(SQL, new Object[]{mark.getName_mark()});
     }
+
+    @Override
+    public Mark findTop(Mark mark) {
+        String SQL = "SELECT * FROM mark WHERE name_mark = ?";
+        return jdbcTemplate.queryForObject(SQL, new Object[]{mark.getName_mark()},BeanPropertyRowMapper.newInstance(Mark.class));
+    }
 }

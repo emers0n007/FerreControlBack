@@ -21,4 +21,15 @@ public class PresentationService implements IPresentationService{
         }
         return row;
     }
+
+    @Override
+    public int findTop() {
+        int row;
+        try {
+            row = iPresentationRepository.findTop();
+        }catch (Exception ex){
+            throw ex;
+        }
+        return row;
+    }
 }
