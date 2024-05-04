@@ -61,17 +61,17 @@ public class BuyRepository implements IBuyRepository{
         // Insert into Buy_Detail table for each product in buyDetail list
         String buyDetailInsertSQL = "INSERT INTO Buy_Detail (id_buy, id_product, quantity) VALUES (?, ?, ?)";
         for (Product product : buy.getBuyDetail()) {
-            aux = jdbcTemplate.update(buyDetailInsertSQL, buy.getId_buy(), product.getId_product(), product.getStock());
+            aux = jdbcTemplate.update(buyDetailInsertSQL, buy.getId_buy(), product.getId_product(), product.getQuantity());
         }
 
-        String searchProductSQL = "SELECT stock FROM Product WHERE id_product=?";
-        String updateStockProductSQL = "UPDATE Product SET stock=? WHERE id_product=?";
+        String searchProductSQL = "SELECT quantity FROM Product WHERE id_product=?";
+        String updateStockProductSQL = "UPDATE Product SET quantity=? WHERE id_product=?";
         for (Product product : buy.getBuyDetail()) {
             // Buscar el stock actual del producto
             Integer currentStock = jdbcTemplate.queryForObject(searchProductSQL, Integer.class, product.getId_product());
             if (currentStock != null) {
                 // Calcular el nuevo stock (restar la cantidad comprada)
-                int newStock = currentStock + product.getStock();
+                int newStock = currentStock + product.getQuantity();
                 // Actualizar el stock en la base de datos
                 jdbcTemplate.update(updateStockProductSQL, newStock, product.getId_product());
             } else {

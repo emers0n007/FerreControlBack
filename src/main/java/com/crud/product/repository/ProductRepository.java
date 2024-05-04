@@ -19,7 +19,7 @@ public class ProductRepository implements IProductRepository{
     private JdbcTemplate jdbcTemplate;
     @Override
     public List<Product> findAll() {
-        String SQL = "SELECT p.*, s.id_supplier as supplier_id, s.name as supplier_name, s.phone as supplier_phone, s.email as supplier_email, m.id_mark as id_mark, m.name_mark as name_mark, pre.id_presentation as id_presentation, pre.name_presentation " +
+        String SQL = "SELECT p.*, s.id_supplier as supplier_id, s.name as supplier_name, s.phone as supplier_phone, s.email as supplier_email, m.id_mark as id_mark, m.name_mark as name_mark, pre.id_presentation as id_presentation, pre.name_presentation, pre.description_presentation as  description_presentation " +
                 "FROM product p " +
                 "JOIN supplier s ON p.id_supplier = s.id_supplier " +
                 "JOIN mark m ON p.id_mark = m.id_mark " +
@@ -33,6 +33,7 @@ public class ProductRepository implements IProductRepository{
             product.setStock(rs.getInt("stock"));
             product.setPrice_buy(rs.getFloat("price_buy"));
             product.setPrice_sale(rs.getFloat("price_sale"));
+            product.setQuantity(rs.getInt("quantity"));
 
             Supplier supplier = new Supplier();
             supplier.setId_supplier(rs.getInt("supplier_id"));
@@ -51,7 +52,7 @@ public class ProductRepository implements IProductRepository{
             Presentation presentation =  new Presentation();
             presentation.setId_presentation(rs.getInt("id_presentation"));
             presentation.setName_presentation(rs.getString("name_presentation"));
-
+            presentation.setDescription_presentation(rs.getInt("description_presentation"));
             product.setPresentation(presentation);
 
             product.setStatus(rs.getInt("status"));

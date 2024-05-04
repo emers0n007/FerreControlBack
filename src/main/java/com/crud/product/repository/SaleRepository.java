@@ -53,6 +53,7 @@ public class SaleRepository implements ISaleRepository{
     public int save(Sale sale) {
         int aux = 0;
         // Insert into Buy table
+        System.out.println("Lo que llega del front " + sale.toString());
         String buyInsertSQL = "INSERT INTO Sale (id_sale, name_user, sale_date, total_price) VALUES (?, ?, ?, ?)";
         aux = jdbcTemplate.update(buyInsertSQL, sale.getId_sale(), sale.getName_user(), sale.getSale_date(), sale.getTotal_price());
 
