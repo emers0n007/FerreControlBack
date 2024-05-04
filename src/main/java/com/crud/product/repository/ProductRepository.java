@@ -77,4 +77,48 @@ public class ProductRepository implements IProductRepository{
         String SQL ="UPDATE product SET status=0 WHERE id_product =?";
         return jdbcTemplate.update(SQL,new Object[]{id});
     }
+
+    @Override
+    public List<Product> findProductLowStock() {
+        String SQL = "SELECT p.*, s.id_supplier as supplier_id, s.name as supplier_name, s.phone as supplier_phone, s.email as supplier_email, m.id_mark as id_mark, m.name_mark as name_mark, pre.id_presentation as id_presentation, pre.name_presentation, pre.description_presentation as  description_presentation " +
+                "FROM product p " +
+                "JOIN supplier s ON p.id_supplier = s.id_supplier " +
+                "JOIN mark m ON p.id_mark = m.id_mark " +
+                "JOIN presentation pre ON p.id_presentation = pre.id_presentation " +
+                "WHERE p.quantity <= p.stock";
+
+        return jdbcTemplate.query(SQL, (rs, rowNum) -> {
+            Product product = new Product();
+            product.setId_product(rs.getInt("id_product"));
+            product.setName(rs.getString("name"));
+            product.setStock(rs.getInt("stock"));
+            product.setPrice_buy(rs.getFloat("price_buy"));
+            product.setPrice_sale(rs.getFloat("price_sale"));
+            product.setQuantity(rs.getInt("quantity"));
+
+            Supplier supplier = new Supplier();
+            supplier.setId_supplier(rs.getInt("supplier_id"));
+            supplier.setName(rs.getString("supplier_name"));
+            supplier.setPhone(rs.getString("supplier_phone"));
+            supplier.setEmail(rs.getString("supplier_email"));
+
+            product.setSupplier(supplier);
+
+            Mark mark = new Mark();
+            mark.setId_mark(rs.getInt("id_mark"));
+            mark.setName_mark(rs.getString("name_mark"));
+
+            product.setMark(mark);
+
+            Presentation presentation =  new Presentation();
+            presentation.setId_presentation(rs.getInt("id_presentation"));
+            presentation.setName_presentation(rs.getString("name_presentation"));
+            presentation.setDescription_presentation(rs.getInt("description_presentation"));
+            product.setPresentation(presentation);
+
+            product.setStatus(rs.getInt("status"));
+
+            return product;
+        });
+    }
 }

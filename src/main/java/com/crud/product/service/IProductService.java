@@ -9,4 +9,6 @@ public interface IProductService {
     public int save(Product product);
     public int update(Product product);
     public int deleteById(int id);
+
+    public List<Product> findProductLowStock();
 }

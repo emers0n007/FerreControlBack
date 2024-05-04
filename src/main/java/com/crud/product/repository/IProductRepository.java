@@ -10,4 +10,6 @@ public interface IProductRepository {
     public  int update(Product product);
     public int deleteById(int id);
 
+    public List<Product> findProductLowStock();
+
 }

@@ -34,6 +34,11 @@ public class ProductController {
         return new ResponseEntity<>(listProducts, HttpStatus.OK);
     }
 
+    @GetMapping("/low/product")
+    public ResponseEntity<List<Product>> findProductLowStock(){
+        var listProducts = iProductService.findProductLowStock();
+        return new ResponseEntity<>(listProducts, HttpStatus.OK);
+    }
 
 
     @PostMapping("/save/product")

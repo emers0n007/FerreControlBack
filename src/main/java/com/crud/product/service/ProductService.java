@@ -25,6 +25,17 @@ public class ProductService implements IProductService{
     }
 
     @Override
+    public List<Product> findProductLowStock() {
+        List<Product> list;
+        try {
+            list = iProductRepository.findProductLowStock();
+        }catch (Exception ex){
+            throw ex;
+        }
+        return list;
+    }
+
+    @Override
     public int save(Product product) {
         int row;
         try {
