@@ -85,7 +85,7 @@ public class ProductRepository implements IProductRepository{
                 "JOIN supplier s ON p.id_supplier = s.id_supplier " +
                 "JOIN mark m ON p.id_mark = m.id_mark " +
                 "JOIN presentation pre ON p.id_presentation = pre.id_presentation " +
-                "WHERE p.quantity <= p.stock";
+                "WHERE p.quantity <= p.stock AND p.status = 1";
 
         return jdbcTemplate.query(SQL, (rs, rowNum) -> {
             Product product = new Product();

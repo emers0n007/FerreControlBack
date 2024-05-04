@@ -58,19 +58,19 @@ public class SaleRepository implements ISaleRepository{
         aux = jdbcTemplate.update(buyInsertSQL, sale.getId_sale(), sale.getName_user(), sale.getSale_date(), sale.getTotal_price());
 
         // Insert into Buy_Detail table for each product in buyDetail list
-        String buyDetailInsertSQL = "INSERT INTO Sale_Detail (id_sale, id_product, quantity, price) VALUES (?, ?, ?, ?)";
+        String buyDetailInsertSQL = "INSERT INTO Sale_Detail (id_sale, id_product, quantity) VALUES (?, ?, ?)";
         for (Product product : sale.getSaleDetail()) {
-            aux = jdbcTemplate.update(buyDetailInsertSQL, sale.getId_sale(), product.getId_product(), product.getStock(), (product.getPrice_buy()*product.getStock()));
+            aux = jdbcTemplate.update(buyDetailInsertSQL, sale.getId_sale(), product.getId_product(), product.getStock());
         }
 
-        String searchProductSQL = "SELECT stock FROM Product WHERE id_product=?";
-        String updateStockProductSQL = "UPDATE Product SET stock=? WHERE id_product=?";
+        String searchProductSQL = "SELECT quantity FROM Product WHERE id_product=?";
+        String updateStockProductSQL = "UPDATE Product SET quantity=? WHERE id_product=?";
         for (Product product : sale.getSaleDetail()) {
             // Buscar el stock actual del producto
             Integer currentStock = jdbcTemplate.queryForObject(searchProductSQL, Integer.class, product.getId_product());
             if (currentStock != null) {
                 // Calcular el nuevo stock (restar la cantidad comprada)
-                int newStock = currentStock - product.getStock();
+                int newStock = currentStock - product.getQuantity();
                 // Actualizar el stock en la base de datos
                 jdbcTemplate.update(updateStockProductSQL, newStock, product.getId_product());
             } else {
