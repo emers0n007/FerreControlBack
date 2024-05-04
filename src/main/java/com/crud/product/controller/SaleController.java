@@ -30,10 +30,10 @@ public class SaleController {
         int result = iSaleService.save(sale);
         if(result==1){
             serviceResponse.setMessage("Agregado Con Exito");
-            serviceResponse.setSeccess(true);
+            serviceResponse.setSuccess(true);
         }else{
             serviceResponse.setMessage("No se agrego correctamente");
-            serviceResponse.setSeccess(false);
+            serviceResponse.setSuccess(false);
         }
         return new ResponseEntity<>(serviceResponse, HttpStatus.OK);
     }
@@ -43,11 +43,11 @@ public class SaleController {
         Sale result = iSaleService.findSaleById(id);
         if(result!=null){
             serviceResponse.setMessage("Eliminado Con Exito");
-            serviceResponse.setSeccess(true);
+            serviceResponse.setSuccess(true);
             serviceResponse.setData(result);
         }else{
             serviceResponse.setMessage("No se elimino correctamente");
-            serviceResponse.setSeccess(false);
+            serviceResponse.setSuccess(false);
         }
         return new ResponseEntity<>(serviceResponse, HttpStatus.OK);
     }

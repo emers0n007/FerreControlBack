@@ -43,32 +43,38 @@ public class ProductController {
 
     @PostMapping("/save/product")
     public ResponseEntity<ServiceResponse> save(@RequestBody Product product){
-        ServiceResponse serviceResponse =  new ServiceResponse();
-        iPresentationService.save(product.getPresentation());
-        int newIDPresentation = iPresentationService.findTop();
-        Presentation newPresentation = new Presentation();
-        newPresentation.setId_presentation(newIDPresentation);
-        newPresentation.setName_presentation(product.getPresentation().getName_presentation());
-        newPresentation.setDescription_presentation(product.getPresentation().getDescription_presentation());
-        product.setPresentation(newPresentation);
+        ServiceResponse serviceResponse = new ServiceResponse();
+        try {
+            iPresentationService.save(product.getPresentation());
+            int newIDPresentation = iPresentationService.findTop();
+            Presentation newPresentation = new Presentation();
+            newPresentation.setId_presentation(newIDPresentation);
+            newPresentation.setName_presentation(product.getPresentation().getName_presentation());
+            newPresentation.setDescription_presentation(product.getPresentation().getDescription_presentation());
+            product.setPresentation(newPresentation);
 
-        iMarkService.save(product.getMark());
-        Mark newMark = new Mark();
-        newMark.setName_mark(product.getMark().getName_mark());
-        newMark.setId_mark(iMarkService.findTop(product.getMark()).getId_mark());
-        product.setMark(newMark);
+            iMarkService.save(product.getMark());
+            Mark newMark = new Mark();
+            newMark.setName_mark(product.getMark().getName_mark());
+            newMark.setId_mark(iMarkService.findTop(product.getMark()).getId_mark());
+            product.setMark(newMark);
 
-        int result = iProductService.save(product);
-        //int result = 1;
-        if(result==1){
-            serviceResponse.setMessage("Agregado Con Exito");
-            serviceResponse.setSeccess(true);
-        }else{
-            serviceResponse.setMessage("No se agrego correctamente");
-            serviceResponse.setSeccess(false);
+            int result = iProductService.save(product);
+            if(result == 1){
+                serviceResponse.setMessage("Agregado Con Éxito");
+                serviceResponse.setSuccess(true);
+            } else {
+                serviceResponse.setMessage("No se agregó correctamente");
+                serviceResponse.setSuccess(false);
+            }
+        } catch (Exception ex) {
+            // Captura de excepciones y envío de mensaje de error al frontend
+            serviceResponse.setMessage( ex.getMessage());
+            serviceResponse.setSuccess(false);
         }
         return new ResponseEntity<>(serviceResponse, HttpStatus.OK);
     }
+
 
     @PostMapping("/update/product")
     public ResponseEntity<ServiceResponse> update(@RequestBody Product product){
@@ -76,10 +82,10 @@ public class ProductController {
         int result = iProductService.update(product);
         if(result==1){
             serviceResponse.setMessage("Modificado Con Exito");
-            serviceResponse.setSeccess(true);
+            serviceResponse.setSuccess(true);
         }else{
             serviceResponse.setMessage("No se modifico correctamente");
-            serviceResponse.setSeccess(false);
+            serviceResponse.setSuccess(false);
         }
         return new ResponseEntity<>(serviceResponse, HttpStatus.OK);
     }
@@ -90,10 +96,10 @@ public class ProductController {
         int result = iProductService.deleteById(id);
         if(result==1){
             serviceResponse.setMessage("Eliminado Con Exito");
-            serviceResponse.setSeccess(true);
+            serviceResponse.setSuccess(true);
         }else{
             serviceResponse.setMessage("No se elimino correctamente");
-            serviceResponse.setSeccess(false);
+            serviceResponse.setSuccess(false);
         }
         return new ResponseEntity<>(serviceResponse, HttpStatus.OK);
     }

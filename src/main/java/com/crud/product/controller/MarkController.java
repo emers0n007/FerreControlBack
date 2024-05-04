@@ -31,10 +31,10 @@ public class MarkController {
         int result = iMarkService.save(mark);
         if(result==1){
             serviceResponse.setMessage("Agregado Con Exito");
-            serviceResponse.setSeccess(true);
+            serviceResponse.setSuccess(true);
         }else{
             serviceResponse.setMessage("No se agrego Correctamente");
-            serviceResponse.setSeccess(false);
+            serviceResponse.setSuccess(false);
         }
         return new ResponseEntity<>(serviceResponse, HttpStatus.OK);
     }

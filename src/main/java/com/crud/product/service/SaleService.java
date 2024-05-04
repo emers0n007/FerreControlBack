@@ -19,6 +19,7 @@ public class SaleService implements ISaleService{
         try {
             list = iSaleRepository.findAll();
         }catch (Exception ex){
+
             throw ex;
         }
         return list;
@@ -30,6 +31,7 @@ public class SaleService implements ISaleService{
         try {
             row = iSaleRepository.save(sale);
         }catch (Exception ex){
+            System.out.println("Error" + ex.getMessage());
             throw ex;
         }
         return row;

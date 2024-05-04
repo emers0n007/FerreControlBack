@@ -29,10 +29,10 @@ public class BuyController {
         int result = iBuyService.save(buy);
         if(result==1){
             serviceResponse.setMessage("Agregado Con Exito");
-            serviceResponse.setSeccess(true);
+            serviceResponse.setSuccess(true);
         }else{
             serviceResponse.setMessage("No se agrego correctamente");
-            serviceResponse.setSeccess(false);
+            serviceResponse.setSuccess(false);
         }
         return new ResponseEntity<>(serviceResponse, HttpStatus.OK);
     }
@@ -42,11 +42,11 @@ public class BuyController {
         Buy result = iBuyService.findBuyById(id);
         if(result!=null){
             serviceResponse.setMessage("Eliminado Con Exito");
-            serviceResponse.setSeccess(true);
+            serviceResponse.setSuccess(true);
             serviceResponse.setData(result);
         }else{
             serviceResponse.setMessage("No se elimino correctamente");
-            serviceResponse.setSeccess(false);
+            serviceResponse.setSuccess(false);
         }
         return new ResponseEntity<>(serviceResponse, HttpStatus.OK);
     }

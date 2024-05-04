@@ -31,10 +31,10 @@ public class SupplierController {
         int result = iSupplierService.save(supplier);
         if(result==1){
             serviceResponse.setMessage("Agregado Con Exito");
-            serviceResponse.setSeccess(true);
+            serviceResponse.setSuccess(true);
         }else{
             serviceResponse.setMessage("No se agrego Correctamente");
-            serviceResponse.setSeccess(false);
+            serviceResponse.setSuccess(false);
         }
         return new ResponseEntity<>(serviceResponse, HttpStatus.OK);
     }
@@ -45,10 +45,10 @@ public class SupplierController {
         int result = iSupplierService.update(supplier);
         if(result==1){
             serviceResponse.setMessage("Modificado Con Exito");
-            serviceResponse.setSeccess(true);
+            serviceResponse.setSuccess(true);
         }else{
             serviceResponse.setMessage("No se modifico Correctamente");
-            serviceResponse.setSeccess(false);
+            serviceResponse.setSuccess(false);
         }
 
         return new ResponseEntity<>(serviceResponse, HttpStatus.OK);
@@ -60,10 +60,10 @@ public class SupplierController {
         int result = iSupplierService.deleteById(id);
         if(result==1){
             serviceResponse.setMessage("Eliminado Con Exito");
-            serviceResponse.setSeccess(true);
+            serviceResponse.setSuccess(true);
         }else{
             serviceResponse.setMessage("No se elimino Correctamente");
-            serviceResponse.setSeccess(false);
+            serviceResponse.setSuccess(false);
         }
         return new ResponseEntity<>(serviceResponse, HttpStatus.OK);
     }

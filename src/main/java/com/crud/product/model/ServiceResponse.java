@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class ServiceResponse<T> {
-    Boolean seccess;
+    Boolean success;
     String message;
     T data;
 }

@@ -3,7 +3,9 @@ package com.crud.product.service;
 import com.crud.product.model.Product;
 import com.crud.product.repository.IProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,17 +32,21 @@ public class ProductService implements IProductService{
         try {
             list = iProductRepository.findProductLowStock();
 
-        }catch (Exception ex){
+        } catch (Exception ex){
+
             throw ex;
         }
         return list;
     }
 
     @Override
+    @Transactional
     public int save(Product product) {
         int row;
         try {
             row = iProductRepository.save(product);
+        }catch (DataAccessException de){
+            throw new RuntimeException("Error al guardar el producto", de);
         }catch (Exception ex){
             throw ex;
         }
