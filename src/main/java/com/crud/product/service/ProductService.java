@@ -29,6 +29,7 @@ public class ProductService implements IProductService{
         List<Product> list;
         try {
             list = iProductRepository.findProductLowStock();
+
         }catch (Exception ex){
             throw ex;
         }
