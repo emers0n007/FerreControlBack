@@ -31,4 +31,10 @@ public class MarkRepository implements IMarkRepository{
         String SQL = "SELECT * FROM mark WHERE name_mark = ?";
         return jdbcTemplate.queryForObject(SQL, new Object[]{mark.getName_mark()},BeanPropertyRowMapper.newInstance(Mark.class));
     }
+
+    @Override
+    public Mark findById(Mark mark) {
+        String SQL = "SELECT * FROM mark WHERE id_mark = ?";
+        return jdbcTemplate.queryForObject(SQL, new Object[]{mark.getId_mark()},BeanPropertyRowMapper.newInstance(Mark.class));
+    }
 }

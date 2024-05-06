@@ -5,7 +5,8 @@ import com.crud.product.model.Presentation;
 
 public interface IPresentationRepository {
     public int save(Presentation presentation);
-
     public int findTop();
+
+    public Presentation findById(Presentation presentation);
 
 }

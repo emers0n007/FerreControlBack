@@ -24,4 +24,10 @@ public class PresentationRepository implements IPresentationRepository{
         String SQL = "SELECT IDENT_CURRENT('Presentation')";
         return jdbcTemplate.queryForObject(SQL, Integer.class);
     }
+
+    @Override
+    public Presentation findById(Presentation presentation) {
+        String SQL = "SELECT * FROM Presentation WHERE id_presentation = ?";
+        return jdbcTemplate.queryForObject(SQL, new Object[]{presentation.getId_presentation()},BeanPropertyRowMapper.newInstance(Presentation.class));
+    }
 }

@@ -1,8 +1,6 @@
 package com.crud.product.repository;
 
-import com.crud.product.model.Buy;
-import com.crud.product.model.Product;
-import com.crud.product.model.Supplier;
+import com.crud.product.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -17,6 +15,14 @@ public class BuyRepository implements IBuyRepository{
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    private IMarkRepository iMarkRepository;
+
+    @Autowired
+    private IPresentationRepository iPresentationRepository;
+
+    @Autowired
+    private ISupplierRepository iSupplierRepository;
 
 
     @Override
@@ -36,6 +42,7 @@ public class BuyRepository implements IBuyRepository{
                 buy.setId_supplier(rs.getInt("id_supplier"));
                 buy.setPurchase_date(rs.getDate("purchase_date"));
                 buy.setTotal_price(rs.getFloat("total_price"));
+                buy.setName_user(rs.getString("name_user"));
                 buy.setBuyDetail(new ArrayList<>());
                 buyMap.put(id_buy, buy);
             }
@@ -44,7 +51,21 @@ public class BuyRepository implements IBuyRepository{
             product.setName(rs.getString("name"));
             product.setPrice_buy(rs.getFloat("price_buy"));
             product.setPrice_sale(rs.getFloat("price_sale"));
-            product.setStock(rs.getInt("quantity_detail"));
+            product.setStock(rs.getInt("stock"));
+            product.setQuantity(rs.getInt("quantity_detail"));
+            product.setStatus(rs.getInt("status"));
+
+            Mark mark = new Mark();
+            mark.setId_mark(rs.getInt("id_mark"));
+            product.setMark(iMarkRepository.findById(mark));
+
+            Presentation presentation =  new Presentation();
+            presentation.setId_presentation(rs.getInt("id_presentation"));
+            product.setPresentation(iPresentationRepository.findById(presentation));
+
+            Supplier supplier = new Supplier();
+            supplier.setId_supplier(rs.getInt("id_supplier"));
+            product.setSupplier(iSupplierRepository.findById(supplier));
             // Set other properties of the product as needed
             buy.getBuyDetail().add(product);
         });

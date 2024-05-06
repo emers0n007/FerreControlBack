@@ -10,4 +10,6 @@ public interface ISupplierRepository {
     public int save(Supplier supplier);
     public  int update(Supplier supplier);
     public int deleteById(int id);
+
+    public Supplier findById(Supplier supplier);
 }
