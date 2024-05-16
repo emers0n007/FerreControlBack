@@ -9,5 +9,5 @@ public interface IBuyRepository {
     public List<Buy> findAll();
     public int save(Buy buy);
 
-    public Buy findBuyById(int id_buy);
+    public Buy findBuyById(String id_buy);
 }

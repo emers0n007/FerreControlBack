@@ -37,7 +37,7 @@ public class BuyController {
         return new ResponseEntity<>(serviceResponse, HttpStatus.OK);
     }
     @GetMapping("/search/buy/{id}")
-    public ResponseEntity<ServiceResponse> update(@PathVariable int id){
+    public ResponseEntity<ServiceResponse> update(@PathVariable String id){
         ServiceResponse serviceResponse =  new ServiceResponse();
         Buy result = iBuyService.findBuyById(id);
         if(result!=null){

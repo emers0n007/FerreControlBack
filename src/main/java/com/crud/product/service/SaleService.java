@@ -38,7 +38,7 @@ public class SaleService implements ISaleService{
     }
 
     @Override
-    public Sale findSaleById(int id_sale) {
+    public Sale findSaleById(String id_sale) {
         Sale sale;
         try {
             sale = iSaleRepository.findSaleById(id_sale);

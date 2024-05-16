@@ -35,7 +35,7 @@ public class BuyService implements IBuyService{
     }
 
     @Override
-    public Buy findBuyById(int id_buy) {
+    public Buy findBuyById(String id_buy) {
         Buy buy;
         try {
             buy = iBuyRepository.findBuyById(id_buy);

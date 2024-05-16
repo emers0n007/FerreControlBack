@@ -20,7 +20,8 @@ public class UserController {
     @Autowired
     private IUserService iUserService;
 
-    private PasswordEncoder passwordEncoder ;
+    //@Autowired
+    private PasswordEncoder passwordEncoder;
 
     @PostMapping("/login")
     public ResponseEntity<Users> findAll(@RequestBody LoginRequest loginRequest){

@@ -105,7 +105,7 @@ public class BuyRepository implements IBuyRepository{
     }
 
     @Override
-    public Buy findBuyById(int id_buy) {
+    public Buy findBuyById(String id_buy) {
         String SQL = "SELECT b.*, bd.id_product as product_detail_id, bd.quantity as quantity_detail, p.* " +
                 "FROM Buy b " +
                 "JOIN Buy_Detail bd ON b.id_buy = bd.id_buy " +

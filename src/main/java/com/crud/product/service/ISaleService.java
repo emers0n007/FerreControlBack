@@ -9,5 +9,5 @@ public interface ISaleService {
     public List<Sale> findAll();
     public int save(Sale sale);
 
-    public Sale findSaleById(int id_sale);
+    public Sale findSaleById(String id_sale);
 }

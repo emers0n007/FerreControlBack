@@ -9,5 +9,5 @@ public interface ISaleRepository {
     public List<Sale> findAll();
     public int save(Sale sale);
 
-    public Sale findSaleById(int id_Sale);
+    public Sale findSaleById(String id_Sale);
 }

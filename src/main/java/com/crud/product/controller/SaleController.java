@@ -38,7 +38,7 @@ public class SaleController {
         return new ResponseEntity<>(serviceResponse, HttpStatus.OK);
     }
     @GetMapping("/search/sale/{id}")
-    public ResponseEntity<ServiceResponse> update(@PathVariable int id){
+    public ResponseEntity<ServiceResponse> update(@PathVariable String id){
         ServiceResponse serviceResponse =  new ServiceResponse();
         Sale result = iSaleService.findSaleById(id);
         if(result!=null){
