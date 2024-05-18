@@ -12,4 +12,6 @@ public interface IProductRepository {
 
     public List<Product> findProductLowStock();
 
+    public Product findProduct(int id);
+
 }
