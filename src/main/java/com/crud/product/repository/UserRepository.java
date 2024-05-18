@@ -40,6 +40,7 @@ public class UserRepository implements IUserRepository{
 
     @Override
     public int deleteByName(String name_user) {
-        return 0;
+        String SQL ="DELETE FROM Users WHERE name_user =?";
+        return jdbcTemplate.update(SQL,new Object[]{name_user});
     }
 }
