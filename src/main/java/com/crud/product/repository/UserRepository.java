@@ -3,6 +3,7 @@ package com.crud.product.repository;
 import com.crud.product.model.Supplier;
 import com.crud.product.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -42,5 +43,17 @@ public class UserRepository implements IUserRepository{
     public int deleteByName(String name_user) {
         String SQL ="DELETE FROM Users WHERE name_user =?";
         return jdbcTemplate.update(SQL,new Object[]{name_user});
+    }
+
+    @Override
+    public Users findByName(String name_user) {
+        String SQL = "SELECT * FROM users WHERE name_user = ?";
+        try {
+
+            return jdbcTemplate.queryForObject(SQL, new Object[]{name_user}, new BeanPropertyRowMapper<>(Users.class));
+        } catch (EmptyResultDataAccessException e) {
+            // Maneja el caso cuando no se encuentra ningún resultado
+            return null;
+        }
     }
 }

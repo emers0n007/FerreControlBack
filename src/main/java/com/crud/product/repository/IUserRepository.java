@@ -9,4 +9,5 @@ public interface IUserRepository {
     public int save(Users users);
     public  int update(Users users);
     public int deleteByName(String name_user);
+    public Users findByName(String name_user);
 }

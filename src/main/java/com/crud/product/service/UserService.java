@@ -56,4 +56,15 @@ public class UserService implements IUserService{
         }
         return row;
     }
+
+    @Override
+    public Users findByName(String name_user) {
+        Users row;
+        try {
+            row = iUserRepository.findByName(name_user);
+        }catch (Exception ex){
+            throw ex;
+        }
+        return row;
+    }
 }
