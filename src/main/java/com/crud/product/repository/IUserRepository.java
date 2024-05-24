@@ -10,4 +10,8 @@ public interface IUserRepository {
     public  int update(Users users);
     public int deleteByName(String name_user);
     public Users findByName(String name_user);
+
+    public int activateUser(String name_user);
+
+    public int inactivateUser(String name_user);
 }

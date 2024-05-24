@@ -67,4 +67,26 @@ public class UserService implements IUserService{
         }
         return row;
     }
+
+
+    @Override
+    public int activateUser(String name) {
+        int row;
+        try {
+            row = iUserRepository.activateUser(name);
+        }catch (Exception ex){
+            throw ex;
+        }
+        return row;
+    }
+    @Override
+    public int inactivateUser(String name) {
+        int row;
+        try {
+            row = iUserRepository.inactivateUser(name);
+        }catch (Exception ex){
+            throw ex;
+        }
+        return row;
+    }
 }

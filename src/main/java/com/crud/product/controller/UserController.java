@@ -38,9 +38,29 @@ public class UserController {
         for (Users users:listUsers) {
             if(users.getName_user().compareToIgnoreCase(loginRequest.getName_user())==0){
                 if (passwordEncoder.matches(loginRequest.getPassword(), users.getPassword())) {
+                    iUserService.activateUser(users.getName_user());
                     user = users;
                     break;
                 }
+            }
+        }
+        if (user != null) {
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED); // Contraseña incorrecta
+        }
+    }
+
+    @PostMapping("/exit")
+    public ResponseEntity<Users> exit(@RequestBody LoginRequest loginRequest){
+        passwordEncoder =  new BCryptPasswordEncoder();
+        var listUsers = iUserService.findAll();
+        Users user = new Users();
+        for (Users users:listUsers) {
+            if(users.getName_user().compareToIgnoreCase(loginRequest.getName_user())==0){
+                    iUserService.inactivateUser(users.getName_user());
+                    user = users;
+                    break;
             }
         }
         if (user != null) {
